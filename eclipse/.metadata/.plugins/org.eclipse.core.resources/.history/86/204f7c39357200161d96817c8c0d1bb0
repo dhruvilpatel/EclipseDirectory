@@ -1,0 +1,22 @@
+
+public class learnmethods {
+ 
+		public static void main(String args[]){
+			SumofTwoNumbers( 5, 7);
+			
+			ReplaceSpace("Mr John Smith");
+		}
+		public static void  SumofTwoNumbers(int a, int b){
+			
+			System.out.println("Here it is " + (a+b));
+			System.out.println(10 + 'F' - 'A');
+		}
+	public static void ReplaceSpace(String s){
+		String[] word= s.split(" ");
+		String sentence = "";
+		for ( String words : word){
+			sentence += words + "%20"; 
+		}
+		System.out.println(sentence);
+	}
+}

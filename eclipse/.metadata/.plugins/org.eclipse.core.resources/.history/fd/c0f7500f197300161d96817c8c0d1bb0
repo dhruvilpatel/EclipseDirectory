@@ -1,0 +1,14 @@
+
+public class DoubleLinkedList {
+
+	static int data;
+	
+	DoubleLinkedList prev;
+	DoubleLinkedList next;
+	
+	DoubleLinkedList(int data){
+		this.data = data;
+	}
+	
+	
+}

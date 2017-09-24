@@ -1,0 +1,122 @@
+
+public class MaxSubArray {
+
+	
+	
+	public static void main (String args[]){
+		
+	int[] arr =  {13,-3,-25,20,-3,-16,-23,18,20,-7,12,-5,-22,15,-4,7}; 
+	int [] check = check_Maxsubarray(arr);
+	
+		System.out.println("Afterwards: "+calculatingForPlusOne(check,5,arr));
+		System.out.println(arr.length);
+		System.out.println(arr.length/2);
+		System.out.println(find_maximum_subarray_brute(arr, 0, arr.length));
+		System.out.println(find_maximum_crossing_subarray(arr, 0, arr.length/2,arr.length));
+//		
+	}
+	
+	static int[] check_Maxsubarray(int[] arr){
+		int here = 0;
+		int sofar = Integer.MIN_VALUE;
+		int[] sofarvalues = new int[arr.length];
+		for (int i = 0 ; i <arr.length ; i++){
+			
+			if(i == 0){
+			here = Math.max(here + arr[i], Integer.MIN_VALUE);
+			/*int sofarvalue = sofar[i];*/
+			}
+			else{
+				here = Math.max(here + arr[i], arr[i]);
+			}
+			sofar = Math.max(here,sofar);
+			sofarvalues[i] = sofar;
+			
+		}  
+		return sofarvalues;	
+
+		
+	}
+	static int calculatingForPlusOne(int[] max_arr, int additional , int[] orignal_array){
+		int add = 0;
+		int top = max_arr[max_arr.length-1];
+		System.out.println("Intially: "+top);
+		if(top>=0){
+		for (int i = max_arr.length-1 ; i>=0 ; i--){
+			if(i == 0 || top != max_arr[i-1]){
+				break;
+			}
+			add += orignal_array[i];
+		}
+		
+		if(add + additional>0){
+			return max_arr[max_arr.length-1]+add + additional;
+		}
+		}
+		else{
+			return Math.max(top,additional);
+		}
+		
+		return max_arr[max_arr.length-1];
+		
+	}
+	
+	static int find_maximum_subarray_brute(int[] A, int low, int high ){
+		int[] Sum_arr = new int[500];
+		int count = 0;
+		int max = A[0];
+		for ( int i = low ; i < high ; i++ )
+		{
+			int update = 0;
+			for ( int j = i ; j < high ; j++){
+				update = A[j] + update;
+				Sum_arr[count] = update;
+				if(max<Sum_arr[count]){
+					max = Sum_arr[count];
+				}
+				count++;
+			}
+		}
+		
+
+		
+		return max;
+	}
+	
+	static int find_maximum_crossing_subarray(int[] A, int low, int mid, int high){
+		
+		System.out.print("here");
+		
+		int here_left = 0;
+		int sofar_left = A[0];
+		int here_right = 0;
+		int sofar_right = A[mid+1];
+		int index_i = 0;
+		int index_j = mid+1;
+		for ( int i = low; i < mid ; i++){
+			here_left = Math.max(here_left + A[i], A[i]);
+			if(here_left>sofar_left){
+				sofar_left = here_left;
+				index_i = i;
+				
+			}
+			else{
+				sofar_left = sofar_left;
+			}
+		}
+		for ( int i = mid+1; i < high ; i++){
+			here_right = Math.max(here_right + A[i], A[i]);
+			if(here_right>sofar_right){
+				sofar_right = here_right;
+				index_j = i;
+				
+			}
+			else{
+				sofar_right = sofar_right;
+			}
+		}
+		
+		System.out.println("I is : " + index_i + "  and J is : " + index_j);
+		return Math.max(Math.max(sofar_left,sofar_right),sofar_left+sofar_right);
+	}
+}

@@ -1,0 +1,19 @@
+
+public class TreeStructure {
+	TreeNode root;
+	public TreeStructure(){
+		root = null;
+	
+	}
+	  void addNode(int data){
+		if(root==null ){
+			root = TreeNode(data);
+		}
+	}
+	public static void main(String args[]){
+		
+		
+	
+		}
+	
+}

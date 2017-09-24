@@ -1,0 +1,124 @@
+//author Froila
+
+package heap;
+
+import global.AttrType;
+import global.EID;
+import global.NID;
+
+import java.io.IOException;
+
+public class Edge extends Tuple {
+    EID eid = new EID();
+    public static final int max_size = MINIBASE_PAGESIZE;
+    private NID Source;
+    private NID Destination;
+    private AttrType Label = new AttrType(0);
+    private AttrType Weight = new AttrType(1);
+/**
+ * a byte array to hold data
+ */
+    //private byte [] edge;
+
+    /**
+     * start position of this tuple in data[]
+     */
+// private int offset;
+    public Edge() {
+
+        super();
+
+    }
+
+    public Edge(byte[] edge, int offset) {
+
+        super(edge, offset, max_size);
+
+    }
+
+    public Edge(Edge fromEdge) {
+        super(fromEdge);
+
+
+    }
+
+    public AttrType getLabel() {
+        return Label;
+    }
+
+    public AttrType getWeight() {
+        return Weight;
+    }
+
+    public NID getSource() {
+        return Source;
+    }
+
+    public NID getDestination() {
+        return Destination;
+    }
+
+    public void setLabel(AttrType label) {
+        Label = label;
+
+    }
+
+    public void setWeight(AttrType weight) {
+        Weight = weight;
+
+    }
+
+    public void setSource(NID srcid) {
+        Source = srcid;
+
+    }
+
+    public void setDestination(NID destid) {
+        Destination = destid;
+
+    }
+
+    public byte[] getEdgeByteArray() {
+
+        return this.getTupleByteArray();
+    }
+
+    public void EdgeCopy(Edge fromEdge) {
+        super.tupleCopy(fromEdge);
+
+
+    }
+
+    public void EdgeInit(byte[] aEdge, int offset) {
+        super.tupleInit(aEdge, offset, max_size);
+
+
+    }
+
+    public void EdgeSet(byte[] edge, int offset) {
+        super.tupleSet(edge, offset, max_size);
+
+
+    }
+
+    public short size() {
+        return super.size();
+    }
+
+    public void print()
+            throws IOException {
+
+
+        System.out.print("[");
+        System.out.print(this.getSource() + ",");
+        System.out.print(this.getDestination() + ",");
+        System.out.print(this.getLabel() + ",");
+        System.out.print(this.getWeight());
+        System.out.println("]");
+
+    }
+    public EID getEID(){
+    	return eid;
+    }
+
+}

@@ -1,0 +1,48 @@
+
+public class TreeStructure {
+	TreeNode root;
+	public TreeStructure(){
+		root = null;
+	
+	}
+	  void addNode(int data){
+			TreeNode newlink = new TreeNode(null,data,null);
+
+		if(root==null ){
+			root = new TreeNode(null,data,null);
+			return;
+		}
+		else{
+			while(   root.left != null){
+			if(data > root.data){
+				if(root.right == null){
+					root.right = newlink;
+					return;
+				}
+			}else{
+				if(root.left == null){
+					root.left = newlink;
+					return;
+				}
+			}
+		}
+			
+
+			
+		}
+	}
+	public static void main(String args[]){
+		
+		TreeStructure ts = new TreeStructure();
+		ts.addNode(5);
+		ts.addNode(8);
+		ts.addNode(3);
+		ts.addNode(1);
+		ts.addNode(2);
+		ts.addNode(6);
+		ts.addNode(9);
+		
+	
+		}
+	
+}

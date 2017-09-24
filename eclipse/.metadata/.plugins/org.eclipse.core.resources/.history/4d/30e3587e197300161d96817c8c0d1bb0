@@ -1,0 +1,20 @@
+
+public class DoublyFunctions {
+	DoubleLinkedList head;
+
+	int size ;
+	public DoublyFunctions(){
+		head = null;
+		size = 0;
+	}
+	
+	public void addFront(int data){
+			if(head == null){
+				head = new DoubleLinkedList(data);
+			}
+			else{
+				head = new DoubleLinkedList(null, data, head);
+			}
+	}
+	
+}

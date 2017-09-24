@@ -1,0 +1,35 @@
+
+public class TreeStructure {
+	TreeNode root;
+	public TreeStructure(){
+		root = null;
+	
+	}
+	  void addNode(int data){
+		if(root==null ){
+			root = new TreeNode(null,data,null);
+		}
+		else{
+			while( root.right == null || root.left == null){
+			if(data > root.data){
+				root = root.right;
+			}else{
+				root = root.left;
+			}
+		}
+			TreeNode newlink = new TreeNode(null,data,null);
+
+			if (root.data < data){
+			root.right = newlink;
+			}else{
+				root.left = newlink;
+			}
+		}
+	}
+	public static void main(String args[]){
+		
+		
+	
+		}
+	
+}

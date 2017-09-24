@@ -1,0 +1,16 @@
+
+public class DoubleLinkedList {
+
+	static int data;
+	
+	DoubleLinkedList prev;
+	DoubleLinkedList next;
+	
+	DoubleLinkedList(int data){
+		this.data = data;
+	}
+	
+	public void addNodes(int data){
+		DoubleLinkedList d = new DoubleLinkedList();
+	}
+}

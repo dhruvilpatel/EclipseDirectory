@@ -1,0 +1,17 @@
+
+public class SingleListFunctions {
+
+	SingleLinkedList head;
+
+	int size ;
+	public SingleListFunctions(){
+		head = null;
+		size = 0;
+	}
+	
+	
+	public static void main (String args[]){
+		
+	}
+	
+}

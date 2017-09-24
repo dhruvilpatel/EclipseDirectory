@@ -1,0 +1,67 @@
+package HackerRank;
+
+import java.util.Scanner;
+
+public class GameOfTwoStack {
+	public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        
+        
+        	int[] a = {4,2,4,6,1};
+        	int[] b = {2,1,8,5};
+            int n = a.length;
+            int m = b.length;
+            int x = 21;
+            int aCount = 0;
+            int bCount = 0;
+            int check = x;
+            for(int a_i=0; a_i < n; a_i++){
+                if(a[a_i] <= check){
+                    aCount++;
+                    check -= a[a_i];
+                }else{
+                    check = 0;
+                }
+            }
+            check = x;
+            for(int b_i=0; b_i < m; b_i++){
+                if(b[b_i] < check){
+                    bCount++;
+                    check -= b[b_i];
+                }else{
+                    check = 0;
+                }
+            }
+            // your code goes here
+            int mixCount = 0;
+            check = x;
+            int i = 0,j = 0;
+            while(check > 0){
+            	if(i != n && j !=m){
+                if(a[i]>b[j]){
+                        check -= b[j];
+                        j++;
+                    }
+                else{
+                    check -= a[i];
+                        i++;
+                }
+                
+            	}
+            	else{
+            		if(i != n){
+            			check -= a[i];
+                        i++;
+            		}
+            		else{
+            			check -= b[j];
+                        j++;
+            		}
+            	}
+            	mixCount++;
+            }
+            System.out.println(Math.max(Math.max(aCount,bCount),mixCount));
+        }
+        
+    }
+

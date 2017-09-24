@@ -1,0 +1,144 @@
+import java.util.Stack;
+
+
+public class SingleListFunctions {
+
+	static SingleLinkedList head;
+
+	int size ;
+	public SingleListFunctions(){
+		head = null;
+		size = 0;
+	}
+	
+	void addRear(int value){
+		
+		if(head == null){
+			head = new SingleLinkedList(value);
+		}
+		else{
+		SingleLinkedList current = head;
+		while(current.next != null){
+			current = current.next;
+		}
+		SingleLinkedList newlink = new SingleLinkedList(value, null);
+		current.next = newlink;
+		}
+	}
+		
+	public void Print(){
+		SingleLinkedList current = head;
+		while(current != null){
+			System.out.println(current.Data());
+			current = current.next;
+		}
+	}
+	
+	boolean isPalidrome(SingleLinkedList head){
+		
+		SingleLinkedList fast = head;
+		SingleLinkedList slow = head;
+		Stack<Integer> stack = new Stack<Integer>();
+		
+		while (fast != null && fast.next != null){
+			stack.push(slow.data);
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		if(fast != null){
+			slow = slow.next;
+		}
+		while ( slow != null){
+			int top = stack.pop();
+			
+			if(top != slow.data){
+				return false;
+			}
+			slow = slow.next;
+		}
+		
+		return true;
+	}
+	boolean hasCircular(SingleLinkedList head){
+		SingleLinkedList fast = head;
+		SingleLinkedList slow = head;
+		
+		while (fast != null && fast.next != null){
+			slow = slow.next;
+			fast = fast.next.next;
+			if ( slow == fast ){
+				break;
+			}
+		}
+		if(fast == null || fast.next == null){
+			return false;
+		}
+		
+		slow = head;
+		
+		while ( slow != fast){
+			slow = slow.next;
+			fast = fast.next;
+		}
+		return true;
+	}
+	
+	public static void main (String args[]){
+		
+		SingleListFunctions sf = new SingleListFunctions();
+		sf.addRear(4);
+		sf.addRear(7);
+		sf.addRear(8);
+		sf.addRear(0);
+		sf.addRear(1);
+		sf.addRear(6);
+		sf.addRear(8);
+		sf.addRear(5);
+		sf.addRear(8);
+		sf.addRear(0);
+		sf.addRear(1);
+		sf.addRear(6);
+		sf.addRear(8);
+		sf.addRear(5);
+		sf.Print();
+		
+/*		System.out.print(sf.isPalidrome(head));
+*/	
+		System.out.print(sf.hasCircular(head));
+
+		
+	}
+	
+	public static boolean isPalindrome(SingleLinkedList head) {
+		if (head == null || head.next == null)
+			return true;
+		SingleLinkedList fast = head, slow = head, prev = null;
+		while (fast != null && fast.next != null) {
+			prev = slow;
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		prev.next = null;
+		slow = reverse(slow);
+		while (head != null && slow != null) {
+			if (head.val != slow.val)
+				return false;
+			head = head.next;
+			slow = slow.next;
+		}
+	    return true;
+	}
+
+	public static SingleLinkedList reverse(SingleLinkedList) {
+		SingleLinkedList prev = null, cur = head;
+		while (cur != null) {
+			ListNode next = cur.next;
+			cur.next = prev;
+			prev = cur;
+			cur = next;
+		}
+		return prev;
+	}
+	
+	
+}

@@ -1,0 +1,14 @@
+
+public class TreeStructure {
+	TreeNode root;
+	public TreeStructure(){
+		root = null;
+	
+	}
+	public static void main(String args[]){
+		
+		
+	
+		}
+	
+}

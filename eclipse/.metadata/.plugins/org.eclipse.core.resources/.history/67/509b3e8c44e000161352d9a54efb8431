@@ -1,0 +1,10 @@
+
+public class Twitter {
+
+	public static void main (String args[]){
+		
+		String val = "Dhruvil".substring(7-2,7);
+		System.out.println(val);
+		
+	}
+}

@@ -1,0 +1,57 @@
+package ZIndex;
+
+import global.Descriptor;
+
+/**
+ * Created by ajothomas on 3/11/17.
+ */
+public class DescriptorKey {
+    private Descriptor desc;
+    private String key;
+
+    public String toString(){
+
+        return key.toString();
+    }
+
+    /** Class constructor
+     *  @param     value   the value of the integer key to be set
+     */
+    public String convert5Dto1D(Descriptor descObj){
+        String val1 = String.format("%016d", Integer.valueOf(Integer.toBinaryString(descObj.value[0])));
+        String val2 = String.format("%016d", Integer.valueOf(Integer.toBinaryString(descObj.value[1])));
+        String val3 = String.format("%016d", Integer.valueOf(Integer.toBinaryString(descObj.value[2])));
+        String val4 = String.format("%016d", Integer.valueOf(Integer.toBinaryString(descObj.value[3])));
+        String val5 = String.format("%016d", Integer.valueOf(Integer.toBinaryString(descObj.value[4])));
+
+        String ZStrValue = "";
+
+        for(int i=0; i<val1.length(); i++){
+            ZStrValue +=  Character.toString(val5.charAt(i))+ Character.toString(val4.charAt(i))+ Character.toString(val3.charAt(i))+ Character.toString(val2.charAt(i))+ Character.toString(val1.charAt(i));
+        }
+
+        return new StringBuilder(ZStrValue).toString();
+    }
+
+    public DescriptorKey(Descriptor value)
+    {
+        this.desc=new Descriptor(value);
+        this.key = convert5Dto1D(value);
+    }
+
+    /** get a copy of the integer key
+     *  @return the reference of the copy
+     */
+    public String getKey()
+    {
+        return new String(key);
+    }
+
+    /** set the integer key value
+     */
+    public void setKey(Descriptor value)
+    {
+        this.desc=new Descriptor(value);
+        this.key = convert5Dto1D(value);
+    }
+}

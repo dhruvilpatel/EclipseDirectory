@@ -1,0 +1,37 @@
+package iterator;
+
+import global.AttrType;
+import global.PageId;
+import global.TupleOrder;
+import heap.Heapfile;
+import heap.Tuple;
+
+public class ExtendedSort extends Sort{
+	private static final int ARBIT_RUNS = 10;
+	  
+	  private AttrType[]  _in;         
+	  private short       n_cols;
+	  private short[]     str_lens;
+	  private Iterator    _am;
+	  private int         _sort_fld;
+	  private TupleOrder  order;
+	  private int         _n_pages;
+	  private byte[][]    bufs;
+	  private boolean     first_time;
+	  private int         Nruns;
+	  private int         max_elems_in_heap;
+	  private int         sortFldLen;
+	  private int         tuple_size;
+	  
+	  private pnodeSplayPQ Q;
+	  private Heapfile[]   temp_files; 
+	  private int          n_tempfiles;
+	  private Tuple        output_tuple;  
+	  private int[]        n_tuples;
+	  private int          n_runs;
+	  private Tuple        op_buf;
+	  private OBuf         o_buf;
+	  private SpoofIbuf[]  i_buf;
+	  private PageId[]     bufs_pids;
+	  private boolean useBM = true; // flag for whether to use buffer manager
+}

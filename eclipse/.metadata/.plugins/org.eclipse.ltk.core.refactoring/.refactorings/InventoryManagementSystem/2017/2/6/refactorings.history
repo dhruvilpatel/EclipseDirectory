@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 5 elements to &apos;Coding_Practice/src/(default package)&apos;&#x0D;&#x0A;- Original project: &apos;InventoryManagementSystem&apos;&#x0D;&#x0A;- Destination element: &apos;Coding_Practice/src/(default package)&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     Product.java&#x0D;&#x0A;     InventoryManagementSystem.java&#x0D;&#x0A;     PickingResult.java&#x0D;&#x0A;     Warehouse.java&#x0D;&#x0A;     RestockingResult.java" description="Copy compilation units" destination="=Coding_Practice/src&lt;" element1="/src&lt;{Product.java" element2="/src&lt;{InventoryManagementSystem.java" element3="/src&lt;{PickingResult.java" element4="/src&lt;{Warehouse.java" element5="/src&lt;{RestockingResult.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1486606710477" units="5" version="1.0"/>
+</session>

@@ -1,0 +1,32 @@
+package ZIndex;
+
+import btree.DataClass;
+import global.NID;
+
+/**  IndexData: It extends the DataClass.
+ *   It defines the data "rid" for leaf node in B++ tree.
+ */
+public class LeafData extends DataClass {
+  private NID myNid;
+
+  public String toString() {
+     String s;
+     s="[ "+ (new Integer(myNid.pageNo.pid)).toString() +" "
+              + (new Integer(myNid.slotNo)).toString() + " ]";
+     return s;
+  }
+
+  /** Class constructor
+   *  @param    rid  the data rid
+   */
+  public LeafData(NID nid) {myNid= new NID(nid.pageNo, nid.slotNo);};
+
+  /** get a copy of the rid
+  *  @return the reference of the copy 
+  */
+  public NID getData() {return new NID(myNid.pageNo, myNid.slotNo);};
+
+  /** set the rid
+   */ 
+  public void setData(NID nid) { myNid= new NID(nid.pageNo, nid.slotNo);};
+}   

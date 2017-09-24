@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+
+public class learnmethods {
+ 
+		public static void main(String args[]){
+			SumofTwoNumbers( 5, 7);
+			
+			ReplaceSpace("Mr John Smith");
+			
+			ReturnCompressed("aabccaa ");
+			
+			ScannerInputMatrix();
+		}
+		public static void  SumofTwoNumbers(int a, int b){
+			
+			System.out.println("Here it is " + (a+b));
+			System.out.println(10 + 'F' - 'A');
+		}
+	public static void ReplaceSpace(String s){
+		String[] word= s.trim().split(" ");
+		String sentence = "";
+		for ( String words : word){
+			sentence += words + "%20"; 
+		}
+		System.out.println(sentence);
+	}
+	
+	public static void ReturnCompressed(String s){
+		
+		int count = 0;
+		String sentence = "";
+		char lastchar = s.charAt(0);
+		for ( int i = 1 ; i < s.length() ; i++){
+			if (s.charAt(i) == lastchar){
+				count++;
+			}else{
+				count++;
+				sentence += lastchar + Integer.toString(count);			
+				lastchar = s.charAt(i);
+				count = 0;
+			}
+		}
+		if(sentence.length()<s.length()){
+		System.out.println(sentence);
+		}else{
+			System.out.println(s);
+			
+		}
+		
+	}
+	
+	public static void ScannerInputMatrix(){
+	int [][] arr = new int [5][5];
+		for (int i = 0 ; i < 5 ; i++){
+			for (int j = 0 ; j < 5 ; j++ ){
+				Scanner sc = new Scanner(System.in);
+					arr[i][j] = sc.nextInt();
+			}
+			System.out.println(\n);
+		}
+		
+	}
+}

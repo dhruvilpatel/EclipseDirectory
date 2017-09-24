@@ -1,0 +1,21 @@
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.CommonTokenStream;
+public class ANTLRDemo 
+{
+    public static void main( String[] args) throws Exception 
+    {
+    	
+    	HelloLexer lexer = new HelloLexer(new ANTLRInputStream(System.in));
+    	 
+ 	    // Get a list of matched tokens
+ 	    CommonTokenStream tokens = new CommonTokenStream(lexer);
+ 	 
+ 	    // Pass the tokens to the parser
+ 	   HelloParser parser = new HelloParser(tokens);
+
+ 	    
+        ParseTree tree = parser.r(); // begin parsing at rule 'r'
+        System.out.println(tree.toStringTree(parser)); // print LISP-style tree
+    }
+}

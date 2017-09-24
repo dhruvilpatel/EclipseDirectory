@@ -1,0 +1,24 @@
+package tests;
+
+public class TEsting {
+	public static void main(String[] args) throws FieldNumberOutOfBoundException, IOException, InvalidTypeException, InvalidTupleSizeException {
+		
+		
+		Descriptor desc = new Descriptor();
+		desc.set(1, 2, 3, 4, 5);
+		
+		Node node = new Node();
+		node.setHdr();
+		
+		node.setLabel("A");
+		node.setDesc(desc);
+		
+		System.out.println(node.getLabel());
+		
+		for (int j = 0; j < 5; j++) {
+			System.out.println(node.getDesc().get(j));
+				
+		}
+		
+	}
+}

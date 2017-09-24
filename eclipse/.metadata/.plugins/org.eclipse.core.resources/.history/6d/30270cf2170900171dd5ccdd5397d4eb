@@ -1,0 +1,5 @@
+package ZIndex;
+
+public class ZFileRangeScan {
+
+}

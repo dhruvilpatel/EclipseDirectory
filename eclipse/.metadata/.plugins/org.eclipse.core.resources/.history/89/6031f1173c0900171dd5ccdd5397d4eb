@@ -1,0 +1,141 @@
+package diskmgr;
+
+import global.AttrType;
+import global.Descriptor;
+import global.IndexType;
+import global.NID;
+import global.RID;
+import global.SystemDefs;
+import heap.Node;
+import heap.Tuple;
+import index.IndexScan;
+import iterator.FldSpec;
+import iterator.RelSpec;
+import nodeheap.NScan;
+import nodeheap.NodeHeapFile;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.nio.file.Files;
+
+import btree.BTreeFile;
+import btree.IntegerKey;
+import btree.StringKey;
+
+/**
+ * Created by sanjanabadam on 3/13/17.
+ */
+public class batchnodeinsert {
+	public static void main(String[] args) throws Exception {
+		// change this from DB to GDB
+		graphDB gDB = new graphDB(1);
+		String nodeFileName = args[0];
+		String graphDBName = args[1];
+		SystemDefs obj = new SystemDefs(graphDBName+"node.in", 1000, 100, "LRU");
+
+		String btreeName = gDB.get_btree_index_node_label_file_name(graphDBName);
+		int keytype;
+		keytype = AttrType.attrInteger;
+		BTreeFile file;
+		file = new BTreeFile(btreeName, keytype, 4, 1);// full delete
+
+		if (graphDB.check_datbase_file_exits(graphDBName)) {
+			gDB.openDB(graphDBName); // there is an existing DB
+		} else {
+			gDB.openDB(graphDBName, 100);
+			gDB.add_graph_db_name(graphDBName);
+		}
+		NodeHeapFile nodeHeapFile = new NodeHeapFile(graphDBName+"node.in");
+		NScan nscan = new NScan(nodeHeapFile);
+		String[] lines = Files.readAllLines(new File(nodeFileName).toPath()).toArray(new String[0]);
+		for (String line : lines) {
+			String toInsertNodeFile = gDB.get_node_heap_file_name(graphDBName);
+			FileWriter fileWriter = new FileWriter(toInsertNodeFile, true);
+			BufferedWriter bw = new BufferedWriter(fileWriter);
+			bw.write(line);
+			bw.write("\n");
+			bw.close();
+			fileWriter.close();
+			gDB.increment_node_count();
+			byte[] byteArray = line.getBytes();
+			NID insertedNID = nodeHeapFile.insertNode(byteArray);
+			// System.out.println(insertedNID);
+			String[] values = line.split(" ");
+			String inputLabel = values[0];
+			int inputDesc1 = Integer.parseInt(values[1]);
+			int inputDesc2 = Integer.parseInt(values[2]);
+			int inputDesc3 = Integer.parseInt(values[3]);
+			int inputDesc4 = Integer.parseInt(values[4]);
+			int inputDesc5 = Integer.parseInt(values[5]);
+			AttrType nLabel = new AttrType(0);
+			nLabel.setValue(inputLabel);
+			Descriptor desc = new Descriptor();
+			desc.set(inputDesc1, inputDesc2, inputDesc3, inputDesc4, inputDesc5);
+			AttrType nDesc = new AttrType(5);
+			nDesc.setDesc(desc);
+			Node insertedNode = nodeHeapFile.getNode(insertedNID);
+			insertedNode.setDesc(nDesc);
+			insertedNode.setLabel(nLabel);
+
+			file.insert(new IntegerKey(Integer.parseInt(inputLabel.trim())), insertedNID);
+
+		}
+
+		Tuple t = new Tuple();
+
+		FldSpec[] projlist = new FldSpec[2];
+		RelSpec rel = new RelSpec(RelSpec.outer);
+		projlist[0] = new FldSpec(rel, 1);
+		projlist[1] = new FldSpec(rel, 2);
+		AttrType[] attrType = new AttrType[2];
+		attrType[0] = new AttrType(AttrType.attrInteger);
+		attrType[1] = new AttrType(AttrType.attrInteger);
+		short[] attrSize = new short[2];
+		attrSize[0] = 32;
+		attrSize[1] = 160;
+
+		// start index scan
+		IndexScan iscan = null;
+
+		iscan = new IndexScan(new IndexType(IndexType.B_Index), graphDBName+"node.in", btreeName, attrType, attrSize, 2, 2,
+				projlist, null, 2, true);
+
+		int count = 0;
+		t = null;
+		int outval = 0;
+
+		t = iscan.get_next();
+
+		boolean flag = true;
+
+		while (t != null) {
+			if (count >= 530) {
+				System.err.println("Test1 -- OOPS! too many records");
+				flag = false;
+				break;
+			}
+
+			outval = t.getIntFld(1);
+
+			t = iscan.get_next();
+			count++;
+			System.out.println(outval);
+
+		}
+		if (count < 530) {
+			System.err.println("Test1 -- OOPS! too few records");
+		}
+		System.out.println(count);
+		// clean up
+
+		iscan.close();
+
+		// System.out.println("NodeHeapFileCount:" +nodeHeapFile.getNodeCnt());
+		System.out.println("Edge Count: " + gDB.getEdgeCnt(graphDBName));
+		System.out.println("Node Count: " + gDB.getNodeCnt(graphDBName));
+		System.out.println("Disk Pages read: " + PCounter.rcounter);
+		System.out.println("Disk Pages written: " + PCounter.wcounter);
+
+	}
+}

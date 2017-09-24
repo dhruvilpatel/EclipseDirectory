@@ -1,0 +1,15 @@
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+import org.antlr.runtime.CommonTokenStream;
+
+public class ANTLRDemo {
+    public static void main(String[] args) throws Exception {
+        ANTLRInputStream in = new ANTLRInputStream(System.in);
+        HelloLexer lexer = new HelloLexer(in);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        HelloParser parser = new HelloParser(tokens);
+        parser.eval();
+    }
+
+ 
+}

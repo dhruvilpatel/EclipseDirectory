@@ -1,0 +1,19 @@
+
+public class SingleListFunctions {
+
+	public SingleListFunctions() {
+		// TODO Auto-generated constructor stub
+	} head;
+
+	int size ;
+	public DoublyFunctions(){
+		head = null;
+		size = 0;
+	}
+	
+	
+	public static void main (String args[]){
+		
+	}
+	
+}

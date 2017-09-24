@@ -1,0 +1,42 @@
+import java.util.HashMap;
+
+
+public class Twitter {
+
+	public static void main (String args[]){
+		String ecrypted_message = "";
+		String decrypted_message = "";
+        String key = "251220852512208";
+        HashMap<String,Integer> alphabets = new HashMap<String,Integer>();
+        int[] arr = {
+          'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+        };
+        int count = 0;
+        for( char c = 'A'; c <= 'Z'; c++){
+            alphabets.put(String.valueOf(c),count);
+            count++;
+        }
+        int index = 0;
+        for (int i = 0 ; i < ecrypted_message.length(); i++){
+            int key_value = Character.getNumericValue(key.charAt(index));
+            if(index < key.length()){
+                index++;
+            }else{
+                index = 0;
+            }
+            
+            int char_value = alphabets.get(Character.toUpperCase(ecrypted_message.charAt(i)));
+            if(alphabets.get(Character.toUpperCase(ecrypted_message.charAt(i))) != null){
+            if(!Character.isLowerCase(ecrypted_message.charAt(i))){                              
+            decrypted_message += arr[key_value + char_value];
+                }
+            else{
+                decrypted_message += Character.toLowerCase(arr[key_value + char_value]);
+            }
+                }
+            else{
+                decrypted_message += ecrypted_message.charAt(i);
+            }
+        }
+	}
+}

@@ -1,0 +1,66 @@
+
+public class DoublyFunctions {
+	DoubleLinkedList head;
+
+	int size ;
+	public DoublyFunctions(){
+		head = null;
+		size = 0;
+	}
+	
+	public void addFront(int data){
+			if(head == null){
+				head = new DoubleLinkedList(null,data,null);
+			}
+			else{
+				DoubleLinkedList newlink = new DoubleLinkedList(null, data, head);
+				head.prev = newlink;
+				head = newlink;
+				
+			}
+	}
+	public void RemoveFront(){
+		if (head == null){
+			System.out.println("List is Empty");
+		}
+		else{
+			head = head.next;
+			head.prev = null;
+		}
+	}
+	public void addRear(int data){
+		if(head == null){
+			head = new DoubleLinkedList(null,data,null);
+		}
+		else{
+			DoubleLinkedList current = head;
+			while(current.next != null){
+				current = current.next;
+			}
+			DoubleLinkedList newlink = new DoubleLinkedList(current, data, null);
+			current.next = newlink;
+			
+		}
+}
+	public void Print(){
+		DoubleLinkedList current = head;
+		while(current != null){
+			System.out.println(current.Data());
+			current = current.next;
+		}
+	}
+	public static void main(String args[]){
+		DoublyFunctions df = new DoublyFunctions();
+		df.addFront(5);
+		df.addFront(15);
+		df.addFront(13);
+		df.Print();
+		System.out.println("-----------------------------");
+		df.addRear(50);
+		df.Print();
+		System.out.println("-----------------------------");
+		df.RemoveFront();
+		df.RemoveFront();
+		df.Print();
+	}
+}

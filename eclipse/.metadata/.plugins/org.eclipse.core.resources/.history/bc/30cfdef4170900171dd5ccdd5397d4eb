@@ -1,0 +1,8 @@
+package ZIndex;
+
+import global.GlobalConst;
+
+public class ZFileRangeScan extends ZIndexFileScan
+implements GlobalConst{
+
+}

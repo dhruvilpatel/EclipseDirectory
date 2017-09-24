@@ -1,0 +1,13 @@
+
+public class learnmethods {
+ 
+		public  void main(String args[]){
+			SumofTwoNumbers( 5, 7);
+		}
+		static void  SumofTwoNumbers(int a, int b){
+			
+			System.out.println("Here it is");
+			
+		}
+	
+}

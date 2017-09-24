@@ -1,0 +1,22 @@
+public class DoubleLinkedList {
+
+	static int data;
+	
+	DoubleLinkedList prev;
+	DoubleLinkedList next;
+	
+	DoubleLinkedList(int data){
+		this.data = data;
+	}
+	public static void main (String args[]){
+		Function fn = new Function();
+		DoubleLinkedList dll = new DoubleLinkedList();
+	}
+	
+}
+ class Functions(){
+	Functions(){
+		
+	}
+	
+}

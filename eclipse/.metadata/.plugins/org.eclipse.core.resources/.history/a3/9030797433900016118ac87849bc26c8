@@ -1,0 +1,79 @@
+import java.util.Stack;
+
+
+public class TreeStructure {
+	TreeNode root;
+	public TreeStructure(){
+		root = null;
+	
+	}
+	  void addNode(int data){
+			TreeNode newlink = new TreeNode(null,data,null);
+
+		if(root==null ){
+			root = newlink;
+			return;
+		}
+		else{
+			TreeNode current = root;
+			TreeNode parent = null;
+			while(true){
+				parent = current;
+			if(data < current.data){
+				
+				current = current.left;
+				if(current==null){
+					parent.left = newlink;
+					return;
+				}
+			}else{
+				current = current.right;
+				if(current==null){
+					parent.right = newlink;
+					return;
+				}
+			}
+		}
+			
+
+			
+		}
+	}
+	  String inOrder(){
+		  String inorder = "";
+		  TreeNode current = root;
+		  Stack s = new Stack();
+		  s.push(current);
+		  while(!s.isEmpty()){
+			  TreeNode top = (TreeNode) s.peek();
+			  if(top.left == null){
+				  TreeNode pop = (TreeNode) s.pop();
+				  inorder += Integer.toString(pop.data) + " ";
+				  
+				  inorder += Integer.toString(pop.data) + " ";
+			  }else if( top.right == null){
+				   top = (TreeNode) s.pop();
+			  }
+		  top =top.left;
+		  s.push(top);
+		  
+		  }
+		  
+		  
+		  return "";
+	  }
+	public static void main(String args[]){
+		
+		TreeStructure ts = new TreeStructure();
+		ts.addNode(5);
+		ts.addNode(8);
+		ts.addNode(3);
+		ts.addNode(1);
+		ts.addNode(2);
+		ts.addNode(6);
+		ts.addNode(9);
+		
+	
+		}
+	
+}
