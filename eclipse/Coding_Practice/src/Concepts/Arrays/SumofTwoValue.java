@@ -1,4 +1,4 @@
-package WritingOnOwn;
+package Concepts.Arrays;
 
 import java.util.Arrays;
 import java.util.HashMap;

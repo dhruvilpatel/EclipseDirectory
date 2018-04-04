@@ -38,7 +38,7 @@ class SingleLinkedList {
 	
 }
 class TreeNode{
-	
+	boolean visited;
 	int data;
 	TreeNode right;
 	TreeNode left;

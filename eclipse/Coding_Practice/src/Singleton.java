@@ -19,12 +19,11 @@ class Singleton
     protected void Print(){
         System.out.println(m);
     }
-}
-
-class UsingSingleton{
 
     public static void main (String args[]){
         Singleton s = new Singleton();
         s.getInstance().Print();
+        Singleton s1 = new Singleton();
+        s1.getInstance().Print();
     }
 }

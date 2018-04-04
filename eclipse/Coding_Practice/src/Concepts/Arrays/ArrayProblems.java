@@ -1,4 +1,4 @@
-package WritingOnOwn;
+package Concepts.Arrays;
 
 import java.util.Arrays;
 
@@ -18,6 +18,7 @@ public class ArrayProblems {
 		String[] arr = {"d","dh","ab","dad"}; 
 		Arrays.sort(arr);
 		System.out.println(Arrays.toString(arr));
+		System.out.println(Math.floor(1+2/2));
 	}
 	
 	public static void minMax(int[] arr){
@@ -202,4 +203,61 @@ public class ArrayProblems {
 	}
 	
 	
+}
+
+
+class Solution {
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+         int m = nums1.length;
+        int n = nums2.length;
+        if(m < 1 && n > 0){
+            if( n % 2 == 0) return (nums2[n/2 -1] + nums2[n/2])/2;
+            else return nums2[n/2 ];
+        }
+        
+        if(n < 1 && m > 0){
+            if( m % 2 == 0) return (nums1[m/2 - 1] + nums1[m/2])/2;
+            else return nums1[m/2 ];
+        }
+        
+        if(n == 1 && m == 1){
+            return nums1[0] + nums2[0] / 2;
+        }
+        System.out.println("lenb" + m+ " " + n);
+        int  i = 0 , j = 0;
+        int counter = 0;
+        int hit = n + m / 2;
+        System.out.println("Hit"+  hit);
+        while( i < m && j < n && hit != counter)    
+        {
+            
+            if(nums1[i] <= nums2[j]) i++;
+            else j++;
+            
+            counter++;
+            System.out.println("while"+  i + " " + j + " " + counter);
+        }
+        
+        if( j < n ) {
+            
+             while( j < n && hit != counter){
+                j++;
+                counter++;
+            }
+        if ((n+m) % 2  == 0) return (nums1[i-1] + nums2[j-1] / 2);
+        else return (double)nums2[j];
+        
+        }
+        else {
+            
+            while( i < m && hit != counter){
+                i++;
+                counter++;
+            }
+            
+             if ((n+m) % 2  == 0) return (nums1[i-1] + nums2[j-1] / 2);
+        else return (double)nums2[j-1];
+        }
+        
+    }
 }

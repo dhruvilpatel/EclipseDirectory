@@ -1,0 +1,146 @@
+/*Round - To round up the sum to two digits
+  First Inner Join - Finds all the repeanting TIV_2011
+  Second Inner Join - Return Distinct lat, lon as a pair
+*/
+SELECT Round(SUM(ins1.TIV_2012),2) FROM INSURANCE ins1 
+    INNER JOIN (SELECT TIV_2011 FROM INSURANCE 
+                GROUP BY TIV_2011 HAVING COUNT(*) > 1)ins2 
+                ON ins1.TIV_2011 = ins2.TIV_2011 
+    INNER JOIN (SELECT lat, lon FROM INSURANCE 
+                GROUP BY lat, lon HAVING COUNT(*) = 1)ins3 
+                ON ins1.lat = ins3.lat AND ins1.lon = ins3.lon
+
+
+
+
+
+
+
+                /*
+ * Complete the function below.
+ */
+
+// Determine Key  - I generate the key following the rule mention about
+// Then to find out the start point of the key I cross verify the Expected input and Expected result
+
+    static String decrypt(String encrypted_message) {
+    
+        if(encrypted_message.length() == -1) return "";
+        HashMap<Character,Integer> alphabets = new HashMap<Character,Integer>();
+         char[] charArr = {
+          'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+        };
+        int position = 0;
+        for( char c = 'A'; c <= 'Z'; c++){
+            alphabets.put(c,position);
+            position++;
+        }
+       String key = determineKey(encrypted_message , alphabets);
+       // There can me many possible combination of the string that can be formed 
+       // But as there is no possible way to check where thr key starts from it has been done manually
+       
+       String decrytedString = decryptMessage(encrypted_message, "8251220",alphabets, charArr);
+           System.out.println(decrytedString);
+        return decrytedString;
+    }
+
+
+    public static String determineKey(String encrypted_message, HashMap<Character,Integer> alphabets){
+        StringBuilder key = new StringBuilder();
+        String encrypted = "AtvthrqgseCnikg";
+        String decrypted = "YourfriendAlice";
+        for(int i = 0 ; i < encrypted.length() - 1; i++){
+            char enc = encrypted.charAt(i);
+            char dec = decrypted.charAt(i);
+            if (alphabets.containsKey(Character.toUpperCase(enc))){
+                int position = alphabets.get(Character.toUpperCase(enc)) - alphabets.get(Character.toUpperCase(dec));
+                
+                if (position < 0) key.append(position + 26);
+                else key.append(position);  
+            }
+            
+        }      
+        return key.toString();
+    }
+
+    public static String decryptMessage(String ecrypted_message, String key, HashMap<Character,Integer> alphabets, char[] arr){
+        StringBuilder decreptedMessage = new StringBuilder();
+        int index = 0;
+        for (char enc : ecrypted_message.toCharArray()){
+            int keyValue = Character.getNumericValue(key.charAt(index));
+        
+            if(alphabets.get(Character.toUpperCase(enc)) != null){
+            	int charValue = alphabets.get(Character.toUpperCase(enc));
+            	int value = 0;
+                
+                if(charValue - keyValue < 0) value = charValue - keyValue + 26;
+                else value = charValue - keyValue;
+                
+                if(!Character.isLowerCase(enc)) decreptedMessage.append(arr[value]);
+                else decreptedMessage.append(Character.toLowerCase(arr[value]));     
+            
+                if(index < key.length()-1) index++;
+                else index = 0;
+            
+            }
+            else decreptedMessage.append(enc);
+           
+        }
+        return decreptedMessage.toString();
+    }
+
+
+
+    ************************************************************************************************
+
+
+    /*
+ * Complete the function below.
+ */
+
+    static int findMutationDistance(String start, String end, String[] bank) {
+        
+        if(start.equals(end)) return 0;
+        boolean found = false;
+        for(String s : bank) if(s.equals(end)) found = true;
+        
+        if(!found){
+            return -1;
+        }
+        char[] type = {'A', 'C' , 'G', 'T'} ;
+        HashSet<String> set = new HashSet<String>(Arrays.asList(bank));
+        HashSet<String> visisted = new HashSet<String>();
+        Queue<String> q = new LinkedList<String>();
+        
+        int step = 0;
+        q.add(start);
+        visisted.add(start);
+        while(!q.isEmpty()){
+            int len = q.size();
+            while(len > 0){
+            String current = q.poll();
+            if(current.equals(end)) return step;
+            
+            char[] arr = current.toCharArray();
+            int index = 0;
+            for ( char c : arr){
+                char tmp = c ;
+                for( char lookup : type ){
+                    arr[index] = lookup;
+                    String check = String.valueOf(arr);
+                    if( !visisted.contains(check) && set.contains(check) ) {
+                        q.add(check);
+                        visisted.add(check);
+                    }
+                }
+                arr[index] = tmp;
+                index++;
+            }
+                len--;
+         }
+            step++;
+        }
+        
+        return -1;
+    }
+

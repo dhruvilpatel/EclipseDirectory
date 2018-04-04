@@ -1,3 +1,6 @@
+package TripAdvisor;
+
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -54,7 +57,7 @@ public class PlagiarismDetection {
 
     // returns the plagiarism percentage by reading and generating the Set for the given tokensize
     // input file1 and file2
-    private float nTupleDetection(String file1, String file2, int tupleSize) throws FileNotFoundException {
+    private float nTupleDetection(String file1, String file2, final int tupleSize) throws FileNotFoundException {
         Scanner sc = new Scanner(new File(file1));
         HashSet<String> file1Tuples = new HashSet<>();
 

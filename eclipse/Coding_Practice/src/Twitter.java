@@ -21,7 +21,7 @@ public class Twitter {
             count++;
         }
         String key = "8251220";
-System.out.println(key);
+        System.out.println(key);
         int index = 0;
         for (int i = 0 ; i < ecrypted_message.length(); i++){
             int key_value = Character.getNumericValue(key.charAt(index));

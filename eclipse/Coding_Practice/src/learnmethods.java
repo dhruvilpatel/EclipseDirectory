@@ -24,7 +24,7 @@ public class learnmethods {
 			int[] new_arr = {-4, 3, -9, 0, 4, 1};
 			System.out.println(Integer.toString(index));
 			System.out.println((twoSum(new_arr,5)));
-			System.out.println(Integer.toString(lengthOfLongestSubstring("abcdaef")));
+			System.out.println("lengthOfLongestSubstring"+Integer.toString(lengthOfLongestSubstring("abcdaef")));
 			System.out.println(intToRoman(3750));
 			
 			String str = "Dhruvil";
