@@ -109,7 +109,11 @@ public class ArrayProblems {
 		while(oddPos<len && arr[oddPos]%2 == 1){
 			oddPos +=2 ;
 		}
-		
+		// swap without using temporary
+		// a  = 4 , b = 5
+		// int a = a + b ; a = 9
+		// int b = a - b; b = 4 
+		// int a = a - b; a = 5
 		if(oddPos<len && evenPos < len){
 			int temp = arr[evenPos];
 			arr[evenPos] = arr[oddPos];
